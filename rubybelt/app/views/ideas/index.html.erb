@@ -1,0 +1,34 @@
+<h1> Very profound ideas</h1>
+<div id = "submit"> 
+<form action = "/ideas" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <textarea name="idea[content]" placeholder="post something really profound here">
+    
+    </textarea>
+<input type = "submit" value ="idea!">
+</form>
+</div>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<p class="errors"><%= error %></p>
+	<% end %>
+<% end %>
+
+
+<% @ideas.each do |idea| %>
+
+<p><a href="users/<%= idea.user.id %>"><%= idea.user.alias %></a> says:</p>    
+<%= idea.content %>
+ <% if idea.user.id == @user.id %>
+ 	<a href="/ideas/<%= idea.id %>/destroy">Delete</a>
+<% else %>
+    <a href="/likes/<%= idea.id %>" method="post">Like</a>
+<% end %>
+	<a href="ideas/<%= idea.id %>" style="margin-right"><%= idea.likes.count %> people</a> like this
+<% end %>
+
+<div id = "nav"> 
+<a href="/sessions" data-method="delete" class="logout"> Logout</a>
+</div>
+
