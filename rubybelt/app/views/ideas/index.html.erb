@@ -22,7 +22,7 @@
 <%= idea.content %>
  <% if idea.user.id == @user.id %>
  	<a href="/ideas/<%= idea.id %>/destroy">Delete</a>
-<% else %>
+<% end %>
     <a href="/likes/<%= idea.id %>" method="post">Like</a>
 <% end %>
 	<a href="ideas/<%= idea.id %>" style="margin-right"><%= idea.likes.count %> people</a> like this
